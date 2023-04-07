@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "miaomiaonews"
+version = "0.1.0"
+description = "Help you follow a news topic with the latest development!"
+authors = ["xw"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
