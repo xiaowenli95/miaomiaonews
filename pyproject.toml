@@ -13,6 +13,7 @@ duckdb = "^0.7.1"
 pandas = "^2.0.0"
 pydantic = {version = "^1.10.7", extras = ["dotenv"]}
 loguru = "^0.6.0"
+matplotlib = "^3.7.1"
 
 
 [tool.poetry.group.dev.dependencies]

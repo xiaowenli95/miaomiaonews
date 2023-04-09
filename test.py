@@ -1,32 +1,30 @@
 #%%
-
-filename = "data.json"
-
-# Open the file in write mode
-with open(filename, 'w', encoding='utf8') as f:
-    # Convert the dictionary
-    json.dump(response.json(), f, ensure_ascii=False)
-
-
-#%%
 import pandas as pd
 import duckdb
+import sys, os
 
-with open(filename, 'r') as f:
-    raw = json.load(f)
-df = pd.json_normalize(raw, record_path=['items'])
-# %%
 from newspaper import Article
-url = "http://www.news.cn/2023-04/07/c_1129501525.htm"
-article = Article(url, language='zh')
-article.download()
-article.parse()
-article.authors
-article.publish_date
-article.text
-import nltk
-nltk.download('punkt')
-article.nlp()
-article.keywords
-article.summary
+from loguru import logger
+from src.GSearch import GSearch, GSearchSetting
+from src.news_processing import news_emmit_digests
+
+ # %%
+if __name__ == "__main__":
+
+    logger.remove()
+    # Set logging level to INFO and above
+    logger.add(sys.stderr, format = "{time:HH:mm:ss.SS} | {file} took {elapsed} to execute | {level} | {message} ", level = "INFO")
+
+    # Testing GSearch
+    settings = GSearchSetting()
+    my_search = GSearch(settings)
+    json_input = my_search.search_result_by_query("丰县八孩")
+    #my_search.export_json_result(json_input)
+    df = my_search.parse_reponse_json_to_pd_df(json_input)
+
+    # Testing news_processing
+    digests = news_emmit_digests(df.loc[0]["link"])
+    for row in df.itertuples(index=False):
+        print(news_emmit_digests(row.link))
+
 # %%
