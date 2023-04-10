@@ -130,3 +130,7 @@ dmypy.json
 
 # Data files
 *.json
+
+# Build android app
+.buildozer/
+src/app/bin/
