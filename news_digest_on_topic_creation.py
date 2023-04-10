@@ -5,9 +5,9 @@ import sys, os
 
 from newspaper import Article
 from loguru import logger
-from src.GSearch import GSearch, GSearchSetting
-from src.news_processing import news_emmit_digests
-from src.chatGPT_news import ChatGPTNews, ChatGPTNewsSettings
+from news_services.GSearch import GSearch, GSearchSetting
+from news_services.news_processing import news_emmit_digests
+from news_services.chatGPT_news import ChatGPTNews, ChatGPTNewsSettings
 
  # %%
 if __name__ == "__main__":
