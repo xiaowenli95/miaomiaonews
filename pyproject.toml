@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 newspaper3k = "^0.2.8"
 duckdb = "^0.7.1"
 pandas = "^2.0.0"
@@ -15,6 +15,7 @@ pydantic = {version = "^1.10.7", extras = ["dotenv"]}
 loguru = "^0.6.0"
 matplotlib = "^3.7.1"
 openai = "^0.27.4"
+kivy = "^2.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
