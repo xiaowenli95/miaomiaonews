@@ -8,6 +8,7 @@ def news_emmit_digests(
     ):
 
     article = Article(url, language=language)
+
     article.download()
     article.parse()
     

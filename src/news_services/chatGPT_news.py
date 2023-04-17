@@ -22,6 +22,7 @@ class ChatGPTNews:
 
     def one_off_response(self, ask: str):
         
+        openai.api_key = self.api_key
         completion = openai.ChatCompletion.create(
             model=self.MODEL,
             messages=[

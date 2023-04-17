@@ -3,20 +3,19 @@ import pandas as pd
 import duckdb
 import sys, os
 
-from newspaper import Article
+from newspaper import Article, ArticleException
 from loguru import logger
-from news_services.GSearch import GSearch, GSearchSetting
-from news_services.news_processing import news_emmit_digests
-from news_services.chatGPT_news import ChatGPTNews, ChatGPTNewsSettings
+from src.news_services.GSearch import GSearch, GSearchSetting
+from src.news_services.news_processing import news_emmit_digests
+from src.news_services.chatGPT_news import ChatGPTNews, ChatGPTNewsSettings
 
- # %%
-if __name__ == "__main__":
+def news_main_process(search_key_word: str):
 
     logger.remove()
     # Set logging level to INFO and above
     logger.add(sys.stderr, format = "{time:HH:mm:ss.SS} | {file} took {elapsed} to execute | {level} | {message} ", level = "INFO")
 
-    search_key_word = "丰县八孩"
+    search_key_word = search_key_word
 
     # Testing GSearch
     settings = GSearchSetting()
@@ -29,7 +28,11 @@ if __name__ == "__main__":
     #digests = news_emmit_digests(df.loc[0]["link"])
     keywords_gathering = []
     for row in df.itertuples(index=False):
-        digest = news_emmit_digests(row.link)
+        try:
+            digest = news_emmit_digests(row.link)
+        except ArticleException:
+            digest = None
+            break
         keywords = digest['keywords']
         longest_string = max(keywords, key=len)
         longest_string_truncated = longest_string[0:100]
@@ -42,5 +45,12 @@ if __name__ == "__main__":
         str(keywords_gathering)
     answer = my_response.one_off_response(text)
     logger.success(answer)
+    
+    return answer
+
+ # %%
+if __name__ == "__main__":
+
+    news_main_process("丰县八孩")
 
 # %%
