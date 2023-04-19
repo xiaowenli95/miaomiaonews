@@ -9,12 +9,10 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
-from src.app.webapp.authentication.oauth import github_blueprint
 
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-
 
 def register_extensions(app):
     db.init_app(app)
@@ -50,6 +48,7 @@ def configure_database(app):
 
 
 def create_app(config):
+    from src.app.webapp.authentication.oauth import github_blueprint
     app = Flask(__name__)
     app.config.from_object(config)
     register_extensions(app)

@@ -30,7 +30,7 @@ class FlaskConfig(BaseSettings):
             return v
 
     class Config:
-        env_file = '.env'
+        env_file = os.path.dirname(os.path.abspath(__file__)) + '/.env'
         env_file_encoding = 'utf-8'
     
 class ProductionFlaskConfig(FlaskConfig):
@@ -51,3 +51,6 @@ config_dict = {
 }
 
 # %%
+if __name__ == "__main__":
+    print(FlaskConfig())
+

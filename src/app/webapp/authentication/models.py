@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+#%%
 """
 Copyright (c) 2019 - present AppSeed.us
 """
@@ -10,8 +11,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from src.app.webapp.authentication.util import hash_pass
 
-db = SQLAlchemy()
-login_manager = LoginManager()
+from src.app.webapp import db, login_manager
 
 class Users(db.Model, UserMixin):
 
@@ -55,3 +55,5 @@ def request_loader(request):
 class OAuth(OAuthConsumerMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id", ondelete="cascade"), nullable=False)
     user = db.relationship(Users)
+
+# %%

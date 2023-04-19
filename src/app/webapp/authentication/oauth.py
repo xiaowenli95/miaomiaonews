@@ -12,7 +12,8 @@ from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from flask_dance.contrib.twitter import twitter, make_twitter_blueprint
 from sqlalchemy.orm.exc import NoResultFound
 from src.app.webapp.config import FlaskConfig
-from .models import Users, db, OAuth
+from .models import Users, OAuth
+from src.app.webapp import db
 from flask import redirect, url_for
 from flask import flash
 
